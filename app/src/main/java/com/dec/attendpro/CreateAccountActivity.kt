@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
@@ -64,7 +65,7 @@ class CreateAccountActivity : AppCompatActivity() {
             val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString().trim()
             val phone = etPhone.text.toString().trim()
-            val role = if (findViewById<RadioButton>(R.id.rbStudent).isChecked) "Student" else "Teacher"
+            val role = if (findViewById<RadioButton>(R.id.rbStudent).isChecked) "student" else "teacher"
 
             if (name.isEmpty() || email.isEmpty() || password.isEmpty() || phone.isEmpty()) {
                 Toast.makeText(this, "Please fill all basic details", Toast.LENGTH_SHORT).show()
@@ -75,7 +76,7 @@ class CreateAccountActivity : AppCompatActivity() {
             val sem = etSemester.text.toString().trim()
             val branch = etBranch.text.toString().trim()
 
-            if (role == "Student" && (roll.isEmpty() || sem.isEmpty() || branch.isEmpty())) {
+            if (role == "student" && (roll.isEmpty() || sem.isEmpty() || branch.isEmpty())) {
                 Toast.makeText(this, "Please fill student details", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -89,9 +90,9 @@ class CreateAccountActivity : AppCompatActivity() {
                     name = name,
                     email = email,
                     role = role,
-                    rollNumber = if (role == "Student") roll else null,
-                    semester = if (role == "Student") sem else null,
-                    branch = if (role == "Student") branch else null,
+                    rollNumber = if (role == "student") roll else null,
+                    semester = if (role == "student") sem else null,
+                    branch = if (role == "student") branch else null,
                     phoneNumber = phone
                 )
 
@@ -101,6 +102,7 @@ class CreateAccountActivity : AppCompatActivity() {
                     Toast.makeText(this@CreateAccountActivity, "Account created! Please login.", Toast.LENGTH_LONG).show()
                     finish()
                 } else {
+                    Log.d("ROLE_DEBUG", "Sending role = $role")
                     Toast.makeText(this@CreateAccountActivity, "Error: ${result.exceptionOrNull()?.message}", Toast.LENGTH_LONG).show()
                     btnCreateAccount.isEnabled = true
                 }

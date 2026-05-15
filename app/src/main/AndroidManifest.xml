@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <meta-data
+        android:name="com.google.mlkit.vision.DEPENDENCIES"
+        android:value="face" />
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
 
     <application
         android:name=".AttendProApp"
@@ -11,7 +20,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Material3.DayNight.NoActionBar">
+        android:theme="@style/Theme.AttendPro"
+        android:usesCleartextTraffic="true">
 
         <activity
             android:name=".OnboardingActivity"
@@ -25,6 +35,11 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".CreateAccountActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".RegisterFaceActivity" />
+        <activity android:name=".MarkAttendanceActivity" />
+        <activity android:name=".AttendanceListActivity" />
+        <activity android:name=".StudentManagementActivity" />
+        <activity android:name=".TeacherDashboardActivity" />
 
     </application>
 

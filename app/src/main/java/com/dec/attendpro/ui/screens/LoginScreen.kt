@@ -26,7 +26,7 @@ import com.dec.attendpro.ui.components.AttendProButton
 fun LoginScreen(onLoginSuccess: (String) -> Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var selectedRole by remember { mutableStateOf("Teacher") }
+    var selectedRole by remember { mutableStateOf("teacher") }
 
     Column(
         modifier = Modifier

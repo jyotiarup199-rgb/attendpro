@@ -4,6 +4,7 @@
     <style name="Theme.AttendPro" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/primary_blue</item>
+        <item name="windowActionBar">true</item>
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
@@ -14,5 +15,12 @@
 
     <style name="ShapeAppearance.AttendPro.Medium" parent="ShapeAppearance.Material3.Corner.Medium">
         <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="Theme.AttendPro.ActionBar" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/primary_blue</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 </resources>

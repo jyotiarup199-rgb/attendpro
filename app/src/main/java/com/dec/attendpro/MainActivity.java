@@ -67,19 +67,15 @@ public class MainActivity extends AppCompatActivity {
     private void setupRoleBasedUI() {
         ViewGroup container = findViewById(R.id.content_container);
         BottomAppBar bottomAppBar = findViewById(R.id.bottom_app_bar);
-        FloatingActionButton fabCamera = findViewById(R.id.fab_camera);
-
         if ("Student".equalsIgnoreCase(userRole)) {
             // Student: Single-view, no navigation bar
             getLayoutInflater().inflate(R.layout.layout_student_content, container, true);
             bottomAppBar.setVisibility(View.GONE);
-            fabCamera.setVisibility(View.GONE);
             setupStudentHistory();
         } else {
             // Teacher: Searchable list, full navigation
             getLayoutInflater().inflate(R.layout.layout_teacher_content, container, true);
             bottomAppBar.setVisibility(View.VISIBLE);
-            fabCamera.setVisibility(View.VISIBLE);
             setupTeacherFunctions();
         }
     }
@@ -126,10 +122,6 @@ public class MainActivity extends AppCompatActivity {
                 listContainer.animate().translationY(0f).alpha(1f).setDuration(400).start();
             });
         }
-        
-        findViewById(R.id.fab_camera).setOnClickListener(v -> 
-            Toast.makeText(this, "Launching AI Face Recognition...", Toast.LENGTH_SHORT).show()
-        );
     }
 
     private void setupDropdown(int resId, String[] items) {

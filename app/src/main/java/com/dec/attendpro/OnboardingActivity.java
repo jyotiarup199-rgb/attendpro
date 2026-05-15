@@ -25,8 +25,13 @@ public class OnboardingActivity extends AppCompatActivity {
         btnNext = findViewById(R.id.btnNext);
         Button btnSkip = findViewById(R.id.btnSkip);
 
-        viewPager.setAdapter(new OnboardingAdapter(this));
+        // Initialize the adapter and set it to ViewPager2
+        OnboardingAdapter adapter = new OnboardingAdapter(this);
+        viewPager.setAdapter(adapter);
 
+        // Attach TabLayoutMediator immediately after setting the adapter.
+        // The previous use of viewPager.post() might have caused the mediator to attach
+        // when the adapter was not yet fully recognized or after some state change.
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             // No text needed for dots
         }).attach();

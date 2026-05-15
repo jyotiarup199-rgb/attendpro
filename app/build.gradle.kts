@@ -7,14 +7,15 @@ plugins {
 
 android {
     namespace = "com.dec.attendpro"
-    compileSdk = 36
+    compileSdk = 35
+
 
     defaultConfig {
         applicationId = "com.dec.attendpro"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -32,11 +33,25 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
+        viewBinding = true
+    }
+
+    // Allow TFLite models to be bundled without compression
+    androidResources {
+        noCompress += "tflite"
+    }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
     }
 }
 
@@ -46,7 +61,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.lifecycle.runtime)
-    
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
     // Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
@@ -60,7 +76,28 @@ dependencies {
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
 
-    implementation("com.google.mlkit:face-detection:16.1.5")
+    // ML Kit Face Detection
+    implementation(libs.mlkit.face.detection)
+
+    // TensorFlow Lite
+    implementation(libs.tensorflow.lite)
+    implementation(libs.tensorflow.lite.support)
+
+    // CameraX
+    implementation(libs.camerax.camera2)
+    implementation(libs.camerax.lifecycle)
+    implementation(libs.camerax.view)
+
+
+    // Retrofit + OkHttp
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.gson)
+    implementation(libs.okhttp.core)
+    implementation(libs.okhttp.logging)
+    implementation(libs.gson)
+
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.android)
 
     // Supabase
     implementation(platform(libs.supabase.bom))
@@ -69,7 +106,7 @@ dependencies {
     implementation(libs.supabase.storage)
     implementation(libs.ktor.client.android)
     implementation(libs.kotlinx.serialization.json)
-    
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -77,4 +114,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Lifecycle
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
 }

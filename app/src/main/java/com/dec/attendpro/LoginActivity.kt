@@ -2,6 +2,7 @@ package com.dec.attendpro
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -64,7 +65,9 @@ class LoginActivity : AppCompatActivity() {
                             Toast.makeText(this@LoginActivity, "Profile not found", Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(this@LoginActivity, "Failed to load profile", Toast.LENGTH_SHORT).show()
+                        val error = profileResult.exceptionOrNull()?.message ?: "Unknown error"
+                        Log.e("LoginActivity", "Profile load failed: $error")
+                        Toast.makeText(this@LoginActivity, "Failed to load profile: $error", Toast.LENGTH_LONG).show()
                     }
                 }
             } else {
