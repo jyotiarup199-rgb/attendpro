@@ -13,5 +13,6 @@ data class UserProfile(
     @SerialName("semester") val semester: String? = null,
     @SerialName("branch") val branch: String? = null,
     @SerialName("phone_number") val phoneNumber: String? = null,
-    @SerialName("id_image") val idImage: String? = null
+    @SerialName("id_image") val idImage: String? = null,
+    @SerialName("face_embedding") val faceEmbedding: List<Float>? = emptyList()
 )

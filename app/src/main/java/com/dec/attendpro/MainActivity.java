@@ -1,5 +1,6 @@
 package com.dec.attendpro;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,22 @@ public class MainActivity extends AppCompatActivity {
 
         setupCommonUI();
         setupRoleBasedUI();
+        setupNavigation();
+    }
+
+    private void setupNavigation() {
+        com.google.android.material.bottomnavigation.BottomNavigationView navView = findViewById(R.id.bottom_navigation);
+        if (navView != null) {
+            navView.setOnItemSelectedListener(item -> {
+                int itemId = item.getItemId();
+                if (itemId == R.id.nav_camera) {
+                    startActivity(new Intent(this, MarkAttendanceActivity.class));
+                    return true;
+                }
+                // Handle other navigation items
+                return false;
+            });
+        }
     }
 
     private void setupCommonUI() {
